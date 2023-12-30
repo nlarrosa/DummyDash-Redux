@@ -4,11 +4,12 @@ import AuthLayout from '../layouts/AuthLayout'
 import { GeneralLayout } from '../layouts/GeneralLayout'
 import { PublicRoutes } from './PublicRoutes'
 import { PrivateRoutes } from './PrivateRoutes'
+import { useSelector } from 'react-redux'
 
 
 export const AppRoutes = () => {
 
-  const isLogged = false;
+  const { isLogged } = useSelector((state) => state.auth)
 
   return (
     <Routes>

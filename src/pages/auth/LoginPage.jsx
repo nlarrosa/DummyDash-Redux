@@ -9,13 +9,21 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { useDispatch } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
+import { getLogin } from '../../store/slices/auth/authThunks';
 
 
 export const LoginPage = () => {
 
+  const dispatch = useDispatch();
+  const { formState, onChangeInput } = useForm();
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+        dispatch( 
+          getLogin(formState.username,formState.password)
+        );
     };
 
 
@@ -33,11 +41,12 @@ export const LoginPage = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onChange={onChangeInput}
             />
             <TextField
               margin="normal"
@@ -48,6 +57,7 @@ export const LoginPage = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={onChangeInput}
             />
 
             <Button
