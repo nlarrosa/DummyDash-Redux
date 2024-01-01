@@ -57,6 +57,7 @@ export function GeneralLayout() {
             <Route path='/products' element={<ProductsPage />} />
             <Route path='/users' element={<h1>USERS PAGE</h1>} />
             <Route path='/sales' element={<h1>SALES PAGE</h1>} />
+            <Route path='/*' element={<ProductsPage />} />
           </Routes>
 
           <FooterLayout sx={{ pt: 4 }} />

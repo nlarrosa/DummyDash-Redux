@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialValueAuth = {
     token: null,
+    isLoading: true,
     isLogged: false,
     user: {
         username: null,
@@ -17,15 +18,18 @@ export const authSlice = createSlice({
     initialState: initialValueAuth,
     reducers: {
 
+
         login: (state, action) => {
             state.token = action.payload.token,
             state.isLogged = true,
-            state.user = action.payload.user
+            state.user = action.payload.user,
+            state.isLoading = false
         },
 
         logout: (state) => {
             state.token = null,
             state.isLogged = false,
+            state.isLoading = false,
             state.user = {
                 username: null,
                 email: null,

@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AuthLayout from '../layouts/AuthLayout'
 import { GeneralLayout } from '../layouts/GeneralLayout'
 import { PublicRoutes } from './PublicRoutes'
 import { PrivateRoutes } from './PrivateRoutes'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkToken } from '../store/slices/auth/authThunks'
 
 
 export const AppRoutes = () => {
 
-  const { isLogged } = useSelector((state) => state.auth)
+  const { isLogged, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkToken());
+  },[]);
+
+  if(isLoading){
+    return (<h1>Iniciando...</h1>);
+  }
+
 
   return (
     <Routes>
